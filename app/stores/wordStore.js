@@ -1,42 +1,42 @@
 var dispatcher = require("../dispatcher");
+var wordService = require("../services/wordService");
 
 function WordStore() {
 	var listeners = [];
-	var words = [
-		{name: "Bonjour", tagline: "greeting"},
-		{name: "Au revoir", tagline: "goodbye"},
-		{name: "Bonne Chance", tagline: "good luck"}
-	];
-
-	function getWords() {
-		return words;
-	}
 
 	function onChange(listener) {
 		console.log("onchange listener --: ", listener);
 		listeners.push(listener);
 	}
 
+	function getWords(callback) {
+		wordService.getWords().then(function(res) {
+			callback(res);
+		});
+	}
+
 	function addWord(word) {
-		words.push(word);
-		triggerListeners();
+		wordService.addWord(word).then(function(res) {
+			console.log(res);
+			triggerListeners();
+		});
 	}
 
 	function deleteWord(word) {
-		words.map(function(w, index) {
-			if(w.name === word.name) {
-				_index = index;
-			}
-		});
-		words.splice(_index, 1);
-		triggerListeners();
+		wordService.deleteWord(word).then(function(res) {
+			console.log(res);
+			triggerListeners();
+		})
+		
 	}
 
 	function triggerListeners() {
-		listeners.forEach(function(listener) {
-			console.log('listener :', listener);
-			listener(words);
+		getWords(function(res) {
+			listeners.forEach(function(listener) {
+				listener(res);
+			})
 		})
+		
 	}
 
 	dispatcher.register(function(payload) {

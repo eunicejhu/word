@@ -1,4 +1,5 @@
 var React = require("react");
+var $ = require("jquery");
 var actions = require("../actions/WordActions");
 
 module.exports = React.createClass({
@@ -9,8 +10,20 @@ module.exports = React.createClass({
 		}
 	},
 	addWord: function(e) {
+		
 		e.preventDefault();
+		
 		actions.addWord(this.state);
+		var $form = $(e.target);
+		$form.find("#name").val('');
+		$form.find("#tagline").val('');
+		console.log("state:", this.state);
+
+		var state = this.state;
+		state['name'] = $form.find("#name").val();
+		state['tagline'] = $form.find("#tagline").val();
+		this.setState(state);
+
 	},
 	handleInputChange: function(e) {
 		e.preventDefault();

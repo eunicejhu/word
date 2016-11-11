@@ -9,13 +9,19 @@
   "author": "HU ZUOQIN",
   "license": "ISC",
   "devDependencies": {
+    "body-parser": "^1.15.2",
     "browserify": "^13.1.1",
+    "es6-promise": "^4.0.5",
     "express": "^4.14.0",
     "guid": "0.0.12",
     "gulp": "^3.9.1",
+    "jquery": "^3.1.1",
+    "mongoose": "^4.6.6",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "underscore": "^1.8.3",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   }
 }

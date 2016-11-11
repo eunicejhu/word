@@ -1,16 +1,34 @@
 var gulp = require("gulp");
 var browserify = require("browserify");
+var watchify = require("watchify");
 var reactify = require("reactify");
 var source = require("vinyl-source-stream");
+var concat = require("gulp-concat");
 
 gulp.task("bundle", function() {
-	return browserify({
-		entries: "./app/main.jsx",
-		debug: true
-	}).transform(reactify)
+	var bundler = browserify({
+			entries: "./app/main.jsx",
+			debug: true,
+			transform: [reactify],
+			debug: true,
+			cache: {},
+			packageCache: {},
+			fullPaths: true
+		});
+	var watcher = watchify(bundler);
+
+	return watcher
+		.on('update', function() {
+			var updateStart = Date.now();
+			console.log('Updating!');
+			watcher.bundle()
+			.pipe(source('main.js'))
+			.pipe(gulp.dest('app/dist'));
+			console.log('Updated!', (Date.now() - updateStart) + 'ms');
+		})
 		.bundle()
-		.pipe(source("main.js"))
-		.pipe(gulp.dest("app/dist"))
+		.pipe(source('main.js'))
+		.pipe(gulp.dest('app/dist'));
 });
 
 gulp.task("copy", ["bundle"], function() {

@@ -1,17 +1,23 @@
 globalPackages=(
-		gulp
-		bower
-		nodemon
+		# gulp
+		# bower
+		# nodemon
 	)
 localPackages=(
 		# browserify 
 		# reactify 
+		# watchify
 		# vinyl-source-stream 
 		# gulp 
 		# react 
 		# react-dom 
 		# express 
 		# guid
+		# mongoose
+		# body-parser
+		# underscore
+		# jquery
+		# es6-promise
 	)
 
 bowerPackages=(
