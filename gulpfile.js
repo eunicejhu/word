@@ -3,8 +3,8 @@ var browserify = require("browserify");
 var watchify = require("watchify");
 var reactify = require("reactify");
 var source = require("vinyl-source-stream");
-var concat = require("gulp-concat");
 
+console.log(__dirname);
 gulp.task("bundle", function() {
 	var bundler = browserify({
 			entries: "./app/main.jsx",
