@@ -18,6 +18,7 @@ localPackages=(
 		# underscore
 		# jquery
 		# es6-promise
+		 merge-stream
 	)
 
 bowerPackages=(

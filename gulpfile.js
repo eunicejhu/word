@@ -3,6 +3,7 @@ var browserify = require("browserify");
 var watchify = require("watchify");
 var reactify = require("reactify");
 var source = require("vinyl-source-stream");
+var merge = require('merge-stream');
 
 console.log(__dirname);
 gulp.task("bundle", function() {
@@ -31,8 +32,23 @@ gulp.task("bundle", function() {
 		.pipe(gulp.dest('app/dist'));
 });
 
-gulp.task("copy", ["bundle"], function() {
-	return gulp.src(["app/index.html", "app/lib/bootstrap-css/css/bootstrap.min.css", "app/style.css"])
+gulp.task("bootstrap", function() {
+	var fonts = gulp.src("app/lib/bootstrap-css/fonts/**")
+		.pipe(gulp.dest("app/dist/fonts"));
+	var bootstrap_css = gulp.src("app/lib/bootstrap-css/css/bootstrap.min.css")
+		.pipe(gulp.dest("app/dist/bootstrap"));
+	var bootstrap_js = gulp.src("app/lib/bootstrap-css/js/bootstrap.js")
+		.pipe(gulp.dest("app/dist/"))
+	return merge(fonts, bootstrap_css, bootstrap_js);
+});
+
+gulp.task("copy", ["bundle", "bootstrap"], function() {
+	return gulp.src(
+		[
+			"app/index.html", 
+			"app/lib/jquery/dist/jquery.js",
+			"app/style.css"
+		])
 		.pipe(gulp.dest("app/dist"));
 });
 

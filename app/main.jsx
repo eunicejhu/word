@@ -18,5 +18,3 @@ function render() {
 		document.getElementById("container")
 	);
 }
-
-render();

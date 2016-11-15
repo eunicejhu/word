@@ -22,6 +22,14 @@ function WordStore() {
 		});
 	}
 
+	function editWord(word) {
+		wordService.editWord(word).then(function(res) {
+			console.log(res);
+			triggerListeners();
+		});
+	}
+
+
 	function deleteWord(word) {
 		wordService.deleteWord(word).then(function(res) {
 			console.log(res);

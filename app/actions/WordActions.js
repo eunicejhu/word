@@ -7,6 +7,12 @@ module.exports = {
 			type: "word:addWord"
 		});
 	},
+	editWord: function(word) {
+		dispatcher.dispatch({
+			word: word,
+			type: "word:editWord"
+		})
+	},
 	deleteWord: function(word) {
 		dispatcher.dispatch({
 			word: word,
