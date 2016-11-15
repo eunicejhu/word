@@ -5,7 +5,6 @@ function WordStore() {
 	var listeners = [];
 
 	function onChange(listener) {
-		console.log("onchange listener --: ", listener);
 		listeners.push(listener);
 	}
 

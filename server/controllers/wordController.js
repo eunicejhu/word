@@ -3,11 +3,11 @@ var Word = require("../data/word");
 var Util = require("../../util/util");
 var _ = require("underscore");
 
-console.log("inside wordController ----");
 // Word.find(function(err, words) {
 // 	words.forEach(function(doc) {
 // 		console.log("doc -------", doc);
-// 		doc.tagline = doc.description;
+// 		doc.description = doc.tagline;
+// 		doc.tagline = '';
 // 		doc.save();
 // 	});
 // });
