@@ -19,7 +19,6 @@ module.exports = {
 		});
 	},
 	editWord: function(word) {
-		console.log("edit word in server", word);
 		var Promise = promise.Promise;
 		return new Promise(function(resolve, reject) {
 			$.ajax({

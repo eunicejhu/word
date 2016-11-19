@@ -1,7 +1,7 @@
 globalPackages=(
-		# gulp
+		gulp
 		# bower
-		# nodemon
+		nodemon
 	)
 localPackages=(
 		# browserify 
@@ -18,12 +18,16 @@ localPackages=(
 		# underscore
 		# jquery
 		# es6-promise
-		 merge-stream
+		#  merge-stream
 	)
 
 bowerPackages=(
 		bootstrap-css
 	)
+for globalPackage in "${globalPackages[@]}"
+do
+	sudo npm install -g $globalPackage
+done
 for localPackage in "${localPackages[@]}"
 do
 	npm install --save-dev $localPackage

@@ -13,6 +13,11 @@ module.exports = React.createClass({
 			words: this.props.words
 		}
 	},
+	componentWillReceiveProps: function(nextProps) {
+		this.setState({
+			words: nextProps.words
+		});
+	},
 	reOrder: function(orderBy, orderDir) {
 		this.setState({
 			orderBy: orderBy,
