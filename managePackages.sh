@@ -1,7 +1,7 @@
 globalPackages=(
-		gulp
+		# gulp
 		# bower
-		nodemon
+		# nodemon
 	)
 localPackages=(
 		# browserify 
@@ -22,7 +22,7 @@ localPackages=(
 	)
 
 bowerPackages=(
-		bootstrap-css
+		# bootstrap-css
 	)
 for globalPackage in "${globalPackages[@]}"
 do

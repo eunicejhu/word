@@ -9,6 +9,7 @@
   "author": "HU ZUOQIN",
   "license": "ISC",
   "devDependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "browserify": "^13.1.1",
     "es6-promise": "^4.0.5",

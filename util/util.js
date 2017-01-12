@@ -1,7 +1,9 @@
 var Util = (function() {
 	var 
 		stringToArray,
-		sortBy;
+		sortBy,
+		getUserFromCookie;
+
 	stringToArray = function(str) {
 		var array = str.split(",").map(function(val) {
 			return val.trim();
@@ -18,10 +20,18 @@ var Util = (function() {
 		})
 	};
 
+	getCookie = function(name) {
+		var value = ";" + document.cookie;
+		var parts = value.split(';' + name + '=');
+		if(parts.length == 2) return parts.pop().split(";").shift();
+
+	};
+
+
 	return {
 		stringToArray: stringToArray,
-		sortBy: sortBy
-
+		sortBy: sortBy,
+		getCookie: getCookie
 	}
 })();
 

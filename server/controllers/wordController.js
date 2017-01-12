@@ -22,7 +22,6 @@ router.route("/words/:id?")
 
 function getWords(req, res) {
 	Word.find(function(err, words) {
-		console.log("getWords", words);
 		if(err) {
 			res.send(err);
 		} else {
@@ -32,7 +31,6 @@ function getWords(req, res) {
 }
 
 function addWord(req, res) {
-	console.log("addWord ", req.body);
 	req.body.tagline = Util.stringToArray(req.body.tagline);
 	var word = new Word(_.extend({}, req.body));
 	word.save(function(err) {
@@ -45,7 +43,6 @@ function addWord(req, res) {
 }
 
 function editWord(req, res) {
-	console.log("editWord ", req.body);
 	req.body.tagline = Util.stringToArray(req.body.tagline);
 	Word.update({_id: req.body.id}, req.body, function(err) {
 		if(err) {

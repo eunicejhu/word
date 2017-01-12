@@ -1,10 +1,10 @@
 var $ = require("jquery");
+var ENV_VARS = require("../../util/env_vars");
 var promise = require("es6-promise");
-var resourceUrl = "http://localhost/word/api/words";
+var resourceUrl = ENV_VARS.app_url + "/api/words";
 
 module.exports = {
 	addWord: function(word) {
-		console.log("add word in server", word);
 		var Promise = promise.Promise;
 		return new Promise(function(resolve, reject) {
 			$.ajax({

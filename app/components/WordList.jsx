@@ -35,6 +35,7 @@ module.exports = React.createClass({
 		var orderDir = this.state.orderDir;
 		var queryText = this.state.queryText;
 		var words = this.state.words;
+		var dislayWordList = {display: this.props.bodyVisible? 'block' : 'none'};
 
 		words.forEach(function(word) {
 			if(
@@ -52,7 +53,7 @@ module.exports = React.createClass({
 		}
 
 		return(
-			<div className="row">
+			<div className="row" style={dislayWordList} >
 				<div className="col-md-6 col-md-offset-3">
 					<AddWord />
 				</div>

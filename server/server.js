@@ -4,16 +4,17 @@ var mongoose = require("mongoose");
 var path = require("path");
 
 var wordController = require("./controllers/wordController");
+var userController = require("./controllers/userController");
 
 var app = express();
-console.log("__dirname", __dirname);
 app.use(express.static(path.join(__dirname, "../app/dist")));
 app.use(bodyParser.json());
 app.use("/", wordController);
 app.use("/api", wordController);
+app.use("/access", userController);
 
-app.listen(1111, function() {
-	console.log('Started listening on port ', 1111);
+app.listen(8182, function() {
+	console.log('Started listening on port ', 8182);
 });
 
 mongoose.connect("mongodb://localhost/wordfinder")

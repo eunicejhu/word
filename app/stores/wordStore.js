@@ -56,6 +56,8 @@ function WordStore() {
 				case "deleteWord":
 					deleteWord(payload.word);
 					break;
+				case "editWord":
+					editWord(payload.word);
 			}
 		}
 	});

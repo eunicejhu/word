@@ -20,7 +20,7 @@ module.exports = React.createClass({
 				 	<span>
 				 		{
 					 		this.props.info.tagline.map(function(tag, index) {
-					 			return <WordTag tag={tag} index={"tag_"+index} />;
+					 			return <WordTag tag={tag} key={"tag_"+index} />;
 				 			})
 					 	}
 				 	</span>

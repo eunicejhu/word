@@ -28,6 +28,11 @@ gulp.task("bundle", function() {
 			console.log('Updated!', (Date.now() - updateStart) + 'ms');
 		})
 		.bundle()
+		.on('error', function(err){
+	      // print the error (can replace with gulp-util)
+	      console.log(err.message);
+	      // end this stream
+	    })
 		.pipe(source('main.js'))
 		.pipe(gulp.dest('app/dist'));
 });
