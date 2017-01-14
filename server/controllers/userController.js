@@ -3,6 +3,8 @@ var User = require("../data/user");
 var router = require("express").Router();
 var _ = require("underscore");
 
+mongoose.Promise = require("es6-promise");
+
 var bcrypt = require("bcrypt-nodejs");
 
 router.route("/signup:id?").post(addUser);
@@ -11,18 +13,20 @@ router.route("/logout:id?").post(logout);
 
 function addUser(req, res) {
 	req.body.password = _make_pw_hash(req.body.password);
-	var user = new User(_.extend({}, req.body));
+	var newUser = new User(_.extend({}, req.body));
 	//hash password
-	user.save(function(err, user) {
+	newUser.save(function(err, user) {
 		if(err) {
-			res.send(err);
+			console.log(err);
+			res.status(500).send(err.errmsg);
 		} else {
-			req.session.user = user[0];
-			res.cookie("username", user[0].username, {path: '/'});
-			res.cookie('_id', user[0]._id, {path: '/'});
+			req.session.user = user;
+			console.log("addUser: user", user);
+			res.cookie("username", req.session.user.username, {path: '/'});
+			res.cookie('_id', req.session.user._id, {path: '/'});
 			res.json(user);
 		}
-	})
+	});
 }
 
 function login(req, res) {

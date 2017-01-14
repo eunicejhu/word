@@ -9,14 +9,12 @@ module.exports = React.createClass({
 			}
 		},
 		logout: function(e) {
-			console.log("logout");
 			e.preventDefault();
 			actions.logout(this.state.user);
 		},
 
 		componentWillReceiveProps(nextProps) {
 			if(nextProps.user != this.state.user) {
-				console.log("not the same")
 				this.setState({
 					user: nextProps.user
 				});

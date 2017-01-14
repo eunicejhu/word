@@ -19,12 +19,13 @@ function UserStore() {
 	function signup(user) {
 		userService.signup(user).then(function(res) {
 			triggerListeners(res);
+		}, function(err) {
+			triggerListeners(err);
 		});
 	}
 
 	function logout(user) {
 		userService.logout(user).then(function(res) {
-			console.log("logout user: ", res);
 			triggerListeners(res);
 		});
 	}
