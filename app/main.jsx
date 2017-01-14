@@ -14,7 +14,7 @@ var Login = require("./views/access/login.jsx");
 var WordMainInterface = React.createClass({
 	getInitialState: function() {
 		return {
-			_user: Util.getCookie('username'),
+			_user: {username: Util.getCookie('username')},
 			_words: [],
 			error: null
 		};
@@ -25,24 +25,26 @@ var WordMainInterface = React.createClass({
 		});
 	},
 	accessCallback: function(response) {
+		console.log("response: ", response);
 		if(response.status && response.status != 200) {
 			this.setState({
 				error: {status: response.status, responseText: response.responseText}
 			});
 		} else {
-			var username = Util.getCookie('username')
+			var username = Util.getCookie('username');
+			console.log("username from accessCallback: ", username);
 			this.setState({
-				_user: username,
+				_user: {username: username},
 				error: null
 			});
-			if(username) {
+			if(typeof username != "undefined" && username) {
 				this._getWords();
 			}
 		}
 		
 	},
 	componentDidMount: function() {
-		if(this.state._user) {
+		if(this.state._user && this.state._user.username) {
 			this._getWords();
 		}
 		UserStore.onChange(this.accessCallback);
@@ -55,14 +57,15 @@ var WordMainInterface = React.createClass({
 	},
 	
 	render: function() {
+		var hasUser = this.state._user && this.state._user.username;
 		return (
 			<div>
 				<Header user={this.state._user} />
 				<WarnBar error={this.state.error} />
 				<div className="container">
-					<Login bodyVisible={this.state._user ? false : true} />
-					<SignUp bodyVisible={this.state._user ? false : true} />
-					<WordList bodyVisible={this.state._user ? true : false} words={this.state._words} />
+					<Login bodyVisible={hasUser ? false : true} />
+					<SignUp bodyVisible={hasUser ? false : true} />
+					<WordList bodyVisible={hasUser ? true : false} words={this.state._words} />
 				</div>
 			</div>
 			

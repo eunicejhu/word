@@ -11,7 +11,7 @@ module.exports = React.createClass({
 		logout: function(e) {
 			console.log("logout");
 			e.preventDefault();
-			actions.logout({username: this.state.user});
+			actions.logout(this.state.user);
 		},
 
 		componentWillReceiveProps(nextProps) {
@@ -24,7 +24,7 @@ module.exports = React.createClass({
 		},
 
 		render: function() {
-			var profileVisibility = {display: this.state.user? 'block' : 'none'};
+			var profileVisibility = {display: (this.state.user && this.state.user.username)? 'block' : 'none'};
 			return (
 				<div className="navbar navbar-default">
 			        <div className="container-fluid">
@@ -32,7 +32,7 @@ module.exports = React.createClass({
 			                <a className="navbar-brand" href="#">Word</a>
 			            </div>
 			            <ul className="nav navbar-nav navbar-right" style={profileVisibility}>
-					      <li><a href="#"><span className="glyphicon glyphicon-user"></span> {this.state.user}</a></li>
+					      <li><a href="#"><span className="glyphicon glyphicon-user"></span> {this.state.user.username}</a></li>
 					      <li><a href="#" onClick={this.logout} ><span className="glyphicon glyphicon-log-in" ></span> Logout</a></li>
 					    </ul>
 			        </div>

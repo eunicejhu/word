@@ -24,6 +24,7 @@ function UserStore() {
 
 	function logout(user) {
 		userService.logout(user).then(function(res) {
+			console.log("logout user: ", res);
 			triggerListeners(res);
 		});
 	}

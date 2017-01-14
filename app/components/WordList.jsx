@@ -4,18 +4,21 @@ var AddWord = require("./AddWord.jsx");
 var SearchWord = require("./SearchWord.jsx");
 var _ = require("underscore");
 
+
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
 			orderBy: "name",
 			orderDir: "asc",
 			queryText: "",
-			words: this.props.words
+			words: this.props.words,
+			bodyVisible: this.props.bodyVisible
 		}
 	},
 	componentWillReceiveProps: function(nextProps) {
 		this.setState({
-			words: nextProps.words
+			words: nextProps.words,
+			bodyVisible: nextProps.bodyVisible
 		});
 	},
 	reOrder: function(orderBy, orderDir) {
@@ -35,7 +38,7 @@ module.exports = React.createClass({
 		var orderDir = this.state.orderDir;
 		var queryText = this.state.queryText;
 		var words = this.state.words;
-		var dislayWordList = {display: this.props.bodyVisible? 'block' : 'none'};
+		var dislayWordList = {display: this.state.bodyVisible? 'block' : 'none'};
 
 		words.forEach(function(word) {
 			if(
