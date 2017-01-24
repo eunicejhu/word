@@ -16,14 +16,12 @@ function WordStore() {
 
 	function addWord(word) {
 		wordService.addWord(word).then(function(res) {
-			console.log(res);
 			triggerListeners();
 		});
 	}
 
 	function editWord(word) {
 		wordService.editWord(word).then(function(res) {
-			console.log(res);
 			triggerListeners();
 		});
 	}
@@ -31,7 +29,6 @@ function WordStore() {
 
 	function deleteWord(word) {
 		wordService.deleteWord(word).then(function(res) {
-			console.log(res);
 			triggerListeners();
 		})
 		

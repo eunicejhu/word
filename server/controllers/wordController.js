@@ -61,6 +61,7 @@ function _setCache(key, value) {
 
 function getWords(req, res) {
 	var key = req.cookies.username;
+	console.log("getWords from user: ", key);
 	if(!req.session.user) {
 		req.session.user = {username: req.cookies.username, _id: req.cookies._id};
 	}
@@ -70,6 +71,7 @@ function getWords(req, res) {
 			return false;
 		} else {
 			if(redisResult_get) {
+				console.log("get words from cache: ", redisResult_get);
 				res.json(JSON.parse(redisResult_get));
 			} else {
 				Word.find({createdBy: req.cookies._id})
@@ -103,14 +105,14 @@ function addWord(req, res) {
 }
 
 function editWord(req, res) {
-	req.body.tagline = Util.stringToArray(req.body.tagline);
-	Word.update({_id: req.body.id}, req.body, function(err) {
+	req.body.tagline = _.isString(req.body.tagline)? Util.stringToArray(req.body.tagline) : req.body.tagline;
+	Word.update({_id: req.body._id}, req.body, function(err,response) {
 		if(err) {
 			res.send(err);
 		} else {
 			var key = _fetchUserFromSession(req).username;
 			_clearCache(key);
-			res.json(word);
+			res.json(response);
 		}
 	})
 }

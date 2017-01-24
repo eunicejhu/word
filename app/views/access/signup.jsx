@@ -24,10 +24,8 @@ module.exports = React.createClass({
 	},
 	render: function() {
 
-		var dislaySignupForm = {display: this.props.bodyVisible? 'block' : 'none'};
-
 		return (
-			<div className="row" style={dislaySignupForm} >
+			<div className="row"  >
 				<div className="col-md-6 col-md-offset-3">
 					<div className="well">
 						<div className="text-info cursor font20" data-toggle="collapse" data-target="#signup" >

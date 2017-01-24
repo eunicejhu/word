@@ -20,10 +20,9 @@ module.exports = React.createClass({
 		actions.login(user);
 	},
 	render: function() {
-		var displayLoginForm = {display: this.props.bodyVisible ? 'block' : 'none'}; 
 		
 		return (
-			<div className="row" style={displayLoginForm}>
+			<div className="row" >
 				<div className="col-md-6 col-md-offset-3">
 					<form className="well" onSubmit={this.login}>
 						<div className="form-group">

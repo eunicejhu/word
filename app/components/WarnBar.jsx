@@ -1,6 +1,7 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+
 module.exports = React.createClass({
 		getInitialState: function() {
 			return {
@@ -24,6 +25,9 @@ module.exports = React.createClass({
 		},
 
 		render: function() {
+			if(!this.state.error) {
+				return null;
+			}
 			return (
 				<div className="alert alert-danger alert-dismissable fade in" style={this.state.warnBarVisibility} >
 					<a href="#" className="close" onClick={this.toggleWarnBar} aria-label="close">&times;</a>
