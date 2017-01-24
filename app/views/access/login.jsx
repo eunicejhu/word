@@ -23,7 +23,7 @@ module.exports = React.createClass({
 		
 		return (
 			<div className="row" >
-				<div className="col-md-6 col-md-offset-3">
+				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 					<form className="well" onSubmit={this.login}>
 						<div className="form-group">
 							<label htmlFor={USERNAME}>

@@ -26,7 +26,7 @@ module.exports = React.createClass({
 
 		return (
 			<div className="row"  >
-				<div className="col-md-6 col-md-offset-3">
+				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 					<div className="well">
 						<div className="text-info cursor font20" data-toggle="collapse" data-target="#signup" >
 							<b >New to Word ? </b> <span> sign up </span>

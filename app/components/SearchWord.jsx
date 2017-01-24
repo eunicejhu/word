@@ -13,7 +13,7 @@ module.exports = React.createClass({
 	render: function() {
 		return (
 			<div className="row search-words">
-				<div className="col-md-12">
+				<div className="col-sm-12 col-md-12 col-lg-12">
 					<div className="input-group">
 						<input id="SearchWords" onChange={this.handleSearch} placeholder="Search" type="text" className="form-control" aria-label="Search Words" />
 						<div className="input-group-btn">

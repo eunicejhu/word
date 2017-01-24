@@ -72,14 +72,14 @@ module.exports = React.createClass({
 
 		return(
 			<div className="row" >
-				<div className="col-md-6 col-md-offset-3">
+				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 					<AddWord actionType={ENV_VARS.HANDLE_WORD_ADD} />
 				</div>
 				<EditWord isOpen={this.state.isEdit} wordInEdit={this.state.wordInEdit} />
-				<div className="col-md-6 col-md-offset-3">
+				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 					<SearchWord orderBy={orderBy} orderDir={orderDir} onReOrder={this.reOrder} onSearch={this.searchWords} />
 				</div>
-				<div className="col-md-6 col-md-offset-3 voffset3">
+				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 voffset3">
 				 	{
 				 		filteredWords.map((s,index) => {
 				 			return(
