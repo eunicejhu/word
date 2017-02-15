@@ -41,6 +41,7 @@ function login(req, res) {
 					req.session.user = user[0];
 					res.cookie("username", user[0].username, {path: '/'});
 					res.cookie('_id', user[0]._id, {path: '/'});
+					console.log("success");
 					res.json(user);
 				} else {
 					res.status(500).send('wrong password ')			
