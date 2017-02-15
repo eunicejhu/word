@@ -19,6 +19,7 @@ localPackages=(
 		# jquery
 		# es6-promise
 		#  merge-stream
+		#react-ga
 	)
 
 bowerPackages=(

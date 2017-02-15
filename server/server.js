@@ -4,6 +4,8 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var mongoose = require("mongoose");
 var path = require("path");
+var ENV_VARS = require("../util/env_vars");
+
 
 var wordController = require("./controllers/wordController");
 var userController = require("./controllers/userController");
@@ -27,4 +29,4 @@ app.listen(8182, function() {
 	console.log('Started listening on port ', 8182);
 });
 
-mongoose.connect("mongodb://localhost/wordfinder")
+mongoose.connect("mongodb://localhost/wordfinder", ENV_VARS.MONGODB_OPTIONS);

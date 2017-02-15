@@ -1,3 +1,4 @@
 node_modules
 app/dist
 ftpsync.settings
+util/env_vars.js

@@ -42,7 +42,7 @@ module.exports = React.createClass({
 								<input type="checkbox" id={REMEMBER} /> Remember me
 							</label>
 						</div>
-						<button className="btn btn-info"> Log in </button>
+						<button className="btn cursor btn-info"> Log in </button>
 					</form>
 				</div>
 			</div>

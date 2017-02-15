@@ -38,8 +38,7 @@ module.exports = React.createClass({
 			queryText: queryText
 		});
 	},
-	handleIsEditChange: function(e) {
-		var _id = $(e.target).attr("id");
+	handleIsEditChange: function(_id) {
 		var wordInEdit = this.state.words.find((word) => {
 			return word._id == _id;
 		});
@@ -47,6 +46,14 @@ module.exports = React.createClass({
 			isEdit: true,
 			wordInEdit: wordInEdit
 		});
+	},
+	eachWord: function(word, i) {
+		return (
+			<WordInfo 	key={i}
+						word={word} 
+						handleIsEditChange={this.handleIsEditChange} >
+			</WordInfo>
+		)
 	},
 	render: function() {
 		var filteredWords = [];
@@ -75,17 +82,19 @@ module.exports = React.createClass({
 				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 					<AddWord actionType={ENV_VARS.HANDLE_WORD_ADD} />
 				</div>
-				<EditWord isOpen={this.state.isEdit} wordInEdit={this.state.wordInEdit} />
+				<EditWord 	isOpen={this.state.isEdit} 
+							wordInEdit={this.state.wordInEdit} >
+				</EditWord>
 				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
-					<SearchWord orderBy={orderBy} orderDir={orderDir} onReOrder={this.reOrder} onSearch={this.searchWords} />
+					<SearchWord orderBy={orderBy} 
+								orderDir={orderDir} 
+								onReOrder={this.reOrder} 
+								onSearch={this.searchWords} >
+					</SearchWord>
 				</div>
 				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 voffset3">
 				 	{
-				 		filteredWords.map((s,index) => {
-				 			return(
-				 				<WordInfo word={s} key={"word"+index} handleIsEditChange={this.handleIsEditChange} />
-				 			)
-				 		})
+				 		filteredWords.map(this.eachWord)
 				 	}
 				</div>
 			</div>

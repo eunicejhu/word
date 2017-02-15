@@ -21,7 +21,7 @@ var Util = (function() {
 	};
 
 	getCookie = function(name) {
-		var value = ";" + document.cookie;
+		var value = ";" + document.cookie.replace(/ /g,'');
 		var parts = value.split(';' + name + '=');
 		if(parts.length == 2) return parts.pop().split(";").shift();
 

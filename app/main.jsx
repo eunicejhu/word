@@ -10,6 +10,7 @@ var WarnBar = require("./components/WarnBar.jsx")
 var SignUp = require("./views/access/signup.jsx");
 var Login = require("./views/access/login.jsx");
 
+var ENV_VARS = require("../util/env_vars");
 
 var WordMainInterface = React.createClass({
 
