@@ -1,5 +1,6 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
+var LeftSideBar = require("./components/LeftSideBar.jsx");
 var WordList = require("./components/WordList.jsx");
 var WordStore = require("./stores/wordStore");
 var UserStore = require("./stores/userStore");
@@ -67,7 +68,11 @@ var WordMainInterface = React.createClass({
 				<WarnBar error={this.state.error} />
 				<div className="container">
 					{	hasUser?(
-							<WordList words={this.state._words} />
+							<div className="row">
+								<LeftSideBar />
+								<WordList words={this.state._words} />
+							</div>
+							
 						) : (
 							<div>
 								<Login />

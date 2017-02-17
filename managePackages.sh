@@ -1,6 +1,5 @@
 globalPackages=(
 		# gulp
-		# bower
 		# nodemon
 	)
 localPackages=(
@@ -18,8 +17,10 @@ localPackages=(
 		# underscore
 		# jquery
 		# es6-promise
-		#  merge-stream
-		#react-ga
+		# merge-stream
+		#react-ga //not needed 
+		# bootstrap-daterangepicker 
+		# bootstrap
 	)
 
 bowerPackages=(

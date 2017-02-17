@@ -11,6 +11,8 @@
   "devDependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "bootstrap-daterangepicker": "^2.1.25",
     "browserify": "^13.1.1",
     "cookie-parser": "^1.4.3",
     "es6-promise": "^4.0.5",

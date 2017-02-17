@@ -37,21 +37,25 @@ gulp.task("bundle", function() {
 		.pipe(gulp.dest('app/dist'));
 });
 
-gulp.task("bootstrap", function() {
-	var fonts = gulp.src("app/lib/bootstrap-css/fonts/**")
-		.pipe(gulp.dest("app/dist/fonts"));
-	var bootstrap_css = gulp.src("app/lib/bootstrap-css/css/bootstrap.min.css")
-		.pipe(gulp.dest("app/dist/bootstrap"));
-	var bootstrap_js = gulp.src("app/lib/bootstrap-css/js/bootstrap.js")
-		.pipe(gulp.dest("app/dist/"))
-	return merge(fonts, bootstrap_css, bootstrap_js);
+gulp.task("lib", function() {
+	//---------bootstrap
+	var bootstrap = gulp.src("node_modules/bootstrap/dist/**/*")
+		.pipe(gulp.dest("app/dist/lib/bootstrap"));
+
+	//---------bootstrap-daterangepicker
+	var bootstrap_daterangepicker = gulp.src(["node_modules/bootstrap-daterangepicker/daterangepicker.js", "node_modules/bootstrap-daterangepicker/daterangepicker.css"])
+		.pipe(gulp.dest("app/dist/lib/daterangepicker/"));
+
+	//---------jquery
+	var jquery = gulp.src("node_modules/jquery/dist/jquery.js").pipe(gulp.dest("app/dist/lib/jquery/"))
+
+	return merge(bootstrap, bootstrap_daterangepicker, jquery);
 });
 
-gulp.task("copy", ["bundle", "bootstrap"], function() {
+gulp.task("copy", ["bundle", "lib"], function() {
 	return gulp.src(
 		[
 			"app/index.html", 
-			"app/lib/jquery/dist/jquery.js",
 			"app/style.css"
 		])
 		.pipe(gulp.dest("app/dist"));
