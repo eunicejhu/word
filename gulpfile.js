@@ -1,21 +1,24 @@
 var gulp = require("gulp");
 var browserify = require("browserify");
+var babelify = require("babelify");
 var watchify = require("watchify");
 var reactify = require("reactify");
 var source = require("vinyl-source-stream");
 var merge = require('merge-stream');
+var sourcemaps = require('gulp-sourcemaps');
+var babel = require("gulp-babel");
 
-console.log(__dirname);
-gulp.task("bundle", function() {
+gulp.task("frontend", function() {
 	var bundler = browserify({
-			entries: "./app/main.jsx",
-			debug: true,
-			transform: [reactify],
+			entries: "./frontend/main.jsx",
 			debug: true,
 			cache: {},
 			packageCache: {},
 			fullPaths: true
-		});
+		})
+	.transform(babelify.configure({
+  presets: ["es2015", "react"]
+}));
 	var watcher = watchify(bundler);
 
 	return watcher
@@ -24,8 +27,8 @@ gulp.task("bundle", function() {
 			console.log('Updating!');
 			watcher.bundle()
 			.pipe(source('main.js'))
-			.pipe(gulp.dest('app/dist'));
-			console.log('Updated!', (Date.now() - updateStart) + 'ms');
+			.pipe(gulp.dest('frontend/dist'));
+			console.log('Frontend Updated!', (Date.now() - updateStart) + 'ms');
 		})
 		.bundle()
 		.on('error', function(err){
@@ -34,31 +37,41 @@ gulp.task("bundle", function() {
 	      // end this stream
 	    })
 		.pipe(source('main.js'))
-		.pipe(gulp.dest('app/dist'));
+		.pipe(gulp.dest('frontend/dist'));
 });
 
 gulp.task("lib", function() {
 	//---------bootstrap
 	var bootstrap = gulp.src("node_modules/bootstrap/dist/**/*")
-		.pipe(gulp.dest("app/dist/lib/bootstrap"));
+		.pipe(gulp.dest("frontend/dist/lib/bootstrap"));
 
 	//---------bootstrap-daterangepicker
 	var bootstrap_daterangepicker = gulp.src(["node_modules/bootstrap-daterangepicker/daterangepicker.js", "node_modules/bootstrap-daterangepicker/daterangepicker.css"])
-		.pipe(gulp.dest("app/dist/lib/daterangepicker/"));
+		.pipe(gulp.dest("frontend/dist/lib/daterangepicker/"));
 
 	//---------jquery
-	var jquery = gulp.src("node_modules/jquery/dist/jquery.js").pipe(gulp.dest("app/dist/lib/jquery/"))
+	var jquery = gulp.src("node_modules/jquery/dist/jquery.js").pipe(gulp.dest("frontend/dist/lib/jquery/"))
 
 	return merge(bootstrap, bootstrap_daterangepicker, jquery);
 });
 
-gulp.task("copy", ["bundle", "lib"], function() {
+gulp.task("common", function() {
+	gulp.src("./util/*.js")
+		.pipe(sourcemaps.init())
+			.pipe(babel({
+	            presets: ['es2015']
+	        }))
+		.pipe(sourcemaps.write())
+		.pipe(gulp.dest("./backend/dist"));
+});
+
+gulp.task("copy", ["frontend", "lib", "common"], function() {
 	return gulp.src(
 		[
-			"app/index.html", 
-			"app/style.css"
+			"frontend/index.html", 
+			"frontend/style.css"
 		])
-		.pipe(gulp.dest("app/dist"));
+		.pipe(gulp.dest("frontend/dist"));
 });
 
 gulp.task("default", ["copy"], function() {

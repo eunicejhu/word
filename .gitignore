@@ -1,5 +1,6 @@
 node_modules
-app/dist
+frontend/dist
 ftpsync.settings
 util/env_vars.js
+backend/dist/env_vars.js
 dump.rdb
