@@ -13,10 +13,27 @@ export default class Signup extends React.Component{
 	constructor() {
 		super();
 
+		this.state = {
+			passwordIsVerified: true
+		}
+
 		this.signup = this.signup.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
 	}
 
-	signup() {
+	handleBlur() {
+		let 
+			$signupForm = $(this.refs.signupForm),
+			password = $('#'+PASSWORD, $signupForm).val(),
+			verify_password = $('#'+VERIFY_PASSWORD, $signupForm).val();
+
+		this.setState({
+			passwordIsVerified: password === verify_password
+		});
+	}
+
+	signup(e) {
+		e.preventDefault();
 		var 
 			$signupForm = $(this.refs.signupForm),
 			user = {};
@@ -25,12 +42,11 @@ export default class Signup extends React.Component{
 		user[PASSWORD] = $('#'+PASSWORD, $signupForm).val();
 		user[EMAIL] = $('#'+EMAIL, $signupForm).val();
 
-		signupAction(user);
-
+		this.state.passwordIsVerified && signupAction(user);
 	}
 
 	render() {
-
+		let errorMessage = this.state.passwordIsVerified ? "" : "password is not the same";
 		return (
 			<div className="row"  >
 				<div className="col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
@@ -43,19 +59,20 @@ export default class Signup extends React.Component{
 								<label htmlFor={USERNAME}>
 									Username:
 								</label>
-								<input type="text" className="form-control" id={USERNAME} placeholder={USERNAME} />
+								<input type="text" required className="form-control" id={USERNAME} placeholder={USERNAME} />
 							</div>
 							<div className="form-group">
 								<label htmlFor={PASSWORD}>
 									Password:
 								</label>
-								<input type="password" className="form-control" id={PASSWORD} placeholder="password" />
+								<input type="password" required className="form-control" id={PASSWORD} placeholder="password" />
 							</div>
 							<div className="form-group">
 								<label htmlFor={VERIFY_PASSWORD}>
 									Verify password:
 								</label>
-								<input type="password" className="form-control" id={VERIFY_PASSWORD} placeholder="password" />
+								<input type="password" required onBlur={this.handleBlur} className="form-control" id={VERIFY_PASSWORD} placeholder="password" />
+								<span className="text-danger">{errorMessage}</span>
 							</div>
 							<div className="form-group">
 								<label htmlFor={EMAIL}>

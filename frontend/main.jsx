@@ -14,8 +14,6 @@ import WordList from "./components/WordList.jsx";
 // import LeftSideBar from "./components/LeftSideBar.jsx";
 
 
-console.log("window: ", window);
-
 class WordMainInterface extends React.Component{
 
 	constructor() {
